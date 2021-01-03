@@ -7,8 +7,7 @@ const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 
-
-//Session
+// Session
 app.use(
     session({
         store: new mongoSessisonStore({ mongooseConnection: mongoose.connection }),
@@ -21,36 +20,61 @@ app.use(
 app.set('view engine', 'ejs');
 
 
-// connect to database and pull in model(s)
+// Connect to MongoDB
 mongoose.connect(
     process.env.mongodb,
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log(`MongoDb is Connected`)
 );
 
-// use css an js on ejs file
+// use css and js on ejs file
 app.use(express.static("public"));
 app.use(expressLayouts);
 
+//******* Index & Home *******//
 app.get('/', (req, res) => {
 
     res.render("index");
 
 });
-
 app.get('/home', (req, res) => {
 
     res.render("home");
 
 });
 
+//******* Login & Sign Up *******//
+app.get('/login', (req, res) => {
 
+    if(req.session.userId){
+        res.render("logged")
+    }else{
+        res.render("login");
+    }
+
+});
+app.get('/signup', (req, res) => {
+
+    res.render("signup");
+
+});
+
+//******* Other Pages *******//
+app.get('/instructors', (req, res) => {
+
+    res.render("instructors");
+
+});
+app.get('/courses', (req, res) => {
+
+    res.render("courses");
+
+});
 app.get('/students', (req, res) => {
 
     res.render("students");
 
 });
-
 app.get('/timeline', (req, res) => {
 
     res.render("timeline");

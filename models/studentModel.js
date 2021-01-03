@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 const StudentSchema = new Schema({
+  Name: String,
   email: {
     type: String,
     required: true,
@@ -13,27 +14,32 @@ const StudentSchema = new Schema({
     type: String,
     required: true
   },
-  Name: String,
   Number: Number,
   Course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }],
 
 });
 
 // create a new user with secure (hashed) password (for sign up)
-StudentSchema.statics.createSecure = function (email, password, cb) {
-  // `_this` now references our schema
-  var _this = this;
+StudentSchema.statics.createSecure = (body, callback) => {
+  
+  console.log("I received this email, password:");
+  console.log("Email: "+body.email+"\nPassword: "+body.password);
+
   // generate some salt
   bcrypt.genSalt(function (err, salt) {
+    console.log("bcrypt salt: ",salt)
     // hash the password with the salt
-    bcrypt.hash(password, salt, function (err, hash) {
-      // build the user object
-      var user = {
-        email: email,
-        passwordDigest: hash
-      };
+    bcrypt.hash(body.password, salt, (err, hash) => {
+      console.log("hash: ",hash)
+
       // create a new user in the db with hashed password and execute the callback when done
-      _this.create(user, cb);
+      Student.create({
+        email: body.email,
+        passwordDigest: hash,
+        name: body.name,
+        number: body.number,
+        course: body.course1+body.course2+body.course3
+      },callback);
     });
   });
 };
@@ -65,6 +71,8 @@ StudentSchema.methods.checkPassword = function (password) {
   // returns true or false
   return bcrypt.compareSync(password, this.passwordDigest);
 };
+
+
 
 
 var Student = mongoose.model('Student', StudentSchema);

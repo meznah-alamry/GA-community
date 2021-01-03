@@ -15,6 +15,9 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
 ### Day-1
 - Wireframes ✔︎
 - HTML/CSS ×
+    * Ibrahim: splash, home, login
+    * Rawan: signup, instructors, courses
+    * Meznah: students, timeline
 - Models ×
 - Node/Express Initialization ×
 - Current Status:

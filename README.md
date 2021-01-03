@@ -6,3 +6,6 @@ a Simple Community for GA Instructors and Students. contains profile pages for s
 - Ibrahim Shaheen
 - Rawan AlOmair
 - Meznah AlAmry
+
+## Wireframes
+Click [Here](./wireframes/README.md) to check wireframes

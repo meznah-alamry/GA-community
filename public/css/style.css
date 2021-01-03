@@ -30,7 +30,6 @@ nav {
     border: 2px solid black;
     background-color: black;
 }
-
 nav a {
     text-decoration: none;
     color: white;
@@ -44,6 +43,65 @@ nav a:hover {
 
 .selected {
     color: #FE2941;
+}
+
+.students-container{
+    width: 50%;
+    margin: 60px auto;
+    font-size: 20px;
+    border: 1px solid black;
+    padding: 30px;
+}
+
+.students-info{
+    display: flex;
+}
+
+.students-img{
+    border: 1px solid rgb(170, 167, 167);
+    width: 150px;
+   display: inline-flex;
+}
+
+.students-img img{
+    width: 150px;
+    height: 150px;
+}
+
+.student-details{
+    margin-left: 30px;
+}
+
+.students-courses{
+    margin-left: 180px;
+}
+
+.timeline-container{
+    width: 60%;
+    margin: 60px auto;
+    border: 1px solid black;
+    background-color: rgb(219, 218, 218);
+}
+
+.timeline-content{
+    display: flex;
+    border: 1px solid black;
+    background-color: white;
+    margin: 10px 10px 0 10px;
+}
+
+.timeline-content:last-child{
+    margin-bottom: 10px;
+}
+
+.timeline-img img{
+    width: 60px;
+    height: 60px;
+    margin-top: 10px;
+}
+
+.timeline-details{
+    margin-left: 5px;
 }
 
 .footer {

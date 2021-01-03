@@ -7,7 +7,12 @@ const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 
-// Session
+//********** Models **********//
+// app.use(require("./models/studentModel"));
+// app.use(require("./models/instructorModel"));
+// app.use(require("./models/courseModel"));
+
+//********** Session **********//
 app.use(
     session({
         store: new mongoSessisonStore({ mongooseConnection: mongoose.connection }),
@@ -20,18 +25,18 @@ app.use(
 app.set('view engine', 'ejs');
 
 
-// Connect to MongoDB
+//********** Connect to MongoDB **********//
 mongoose.connect(
     process.env.mongodb,
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log(`MongoDb is Connected`)
 );
 
-// use css and js on ejs file
+//********** Using Layouts and "Public Folder" **********/
 app.use(express.static("public"));
 app.use(expressLayouts);
 
-//******* Index & Home *******//
+//********** Index & Home **********//
 app.get('/', (req, res) => {
 
     res.render("index");
@@ -43,7 +48,7 @@ app.get('/home', (req, res) => {
 
 });
 
-//******* Login & Sign Up *******//
+//********** Login & Sign Up **********//
 app.get('/login', (req, res) => {
 
     if(req.session.userId){
@@ -59,20 +64,20 @@ app.get('/signup', (req, res) => {
 
 });
 
-//******* Other Pages *******//
+//********** Other Pages **********//
 app.get('/instructors', (req, res) => {
 
-    res.render("instructors");
+    res.render("instructors/instructors");
+
+});
+app.get('/students', (req, res) => {
+
+    res.render("students/students");
 
 });
 app.get('/courses', (req, res) => {
 
     res.render("courses");
-
-});
-app.get('/students', (req, res) => {
-
-    res.render("students");
 
 });
 app.get('/timeline', (req, res) => {
@@ -81,6 +86,12 @@ app.get('/timeline', (req, res) => {
 
 });
 
-//Start Server
+//**********  Controllers **********//
+// app.use(require("./controllers/studentCon"));
+// app.use(require("./controllers/instructorCon"));
+// app.use(require("./controllers/courseCon"));
+
+
+//********** Start Server **********//
 let Port = 4000;
 app.listen(Port, () => console.log(`GA Community Server is Running on Port: ${Port} `));

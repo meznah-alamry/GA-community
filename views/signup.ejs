@@ -17,3 +17,35 @@
     |
     <a href="timeline">General Timeline</a>
 </nav>
+
+<div class="main">
+    <form action="/singup" class="form" method="POST">
+        <h2> Create Your Account</h2>
+
+        <p>Full Name </p>
+        <input type="text" placeholder="your name" name="name">
+        <br>
+        <p>Email</p>
+        <input type="text" placeholder="your email" name="email">
+        <br>
+        <p>Password</p>
+        <input type="password" placeholder="your password" name="password">
+        <br>
+        <p>Phone Number</p>
+        <input type="tel" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+        <br>
+        <p>Courses</p>
+        <input type="checkbox" id="Coruse1" name="Coruse1" value="DSI">
+        <label for="Coruse1">Software Engineering Immersive</label><br>
+
+        <input type="checkbox" id="Coruse2" name="Coruse2" value="SEI">
+        <label for="Coruse2">Data Science Immersive</label><br>
+
+        <input type="checkbox" id="Coruse3" name="Coruse3" value="UEDI">
+        <label for="Coruse3"> User Experience Design Immersive</label><br>
+
+        <br>
+        <input type="submit" value="Submit">
+
+    </form>
+</div>

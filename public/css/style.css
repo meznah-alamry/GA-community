@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 body {
-    background: rgb(255, 244, 244);
+    /* background: rgb(255, 244, 244); */
+    background-color: white;
 }
 
 h1 {

@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
 body {
-    background: rgb(255, 244, 244);
+    /* background: rgb(255, 244, 244); */
+    background-color: white;
 }
 
 h1 {
     font-family: 'Anton', sans-serif;
+}
+
+.loginSignup {
+    font-family: 'Anton', sans-serif;
+    font-size: 30px;
 }
 
 .header {
@@ -25,11 +30,13 @@ nav {
     border: 2px solid black;
     background-color: black;
 }
+
 nav a {
     text-decoration: none;
     color: white;
     text-shadow: 1px 1px 2px #000000;
 }
+
 nav a:hover {
     text-decoration: none;
     color: gray;
@@ -64,4 +71,34 @@ nav a:hover {
     font-family: 'Anton', sans-serif;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.textField {
+    width: 200px;
+    height: 30px;
+}
+
+.container {
+    display: flex;
+}
+
+.item {
+    order: 2;
+}
+
+.title {
+    font-family: 'Anton', sans-serif;
+
+}
+
+.list {
+    font-size: 20px;
+    font-family: Helvetica, sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.desc {
+    font-size: 20px;
+    font-family: Helvetica, sans-serif;
 }

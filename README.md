@@ -19,6 +19,25 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
     * Rawan: signup, instructors, courses
     * Meznah: students, timeline
 - Models ×
+    * students.js
+        * Full Name
+        * Email
+        * Password
+        * Number
+        * Courses: []
+    * instructors.js
+        * Full Name
+        * Hidden Talent
+        * Email
+        * Password
+        * Number
+        * Description
+        * Rating
+    * courses.js
+        * Name
+        * Length
+        * Location
+        * Description
 - Node/Express Initialization ×
 - Current Status:
 ![URL](./assets/progress/day_1.png)

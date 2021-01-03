@@ -8,4 +8,4 @@ a Simple Community for GA Instructors and Students. contains profile pages for s
 - Meznah AlAmry
 
 ## Wireframes
-Click [Here](./wireframes/README.md) to check wireframes
+Click [Here](./assets/wireframes/README.md) to check wireframes

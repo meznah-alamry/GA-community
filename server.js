@@ -51,9 +51,9 @@ app.get('/home', (req, res) => {
 //********** Login & Sign Up **********//
 app.get('/login', (req, res) => {
 
-    if(req.session.userId){
+    if (req.session.userId) {
         res.render("logged")
-    }else{
+    } else {
         res.render("login");
     }
 
@@ -75,6 +75,25 @@ app.get('/students', (req, res) => {
     res.render("students/students");
 
 });
+app.post(
+    "/students",
+    validator.body('email').isEmail(),
+    validator.body('password').isLength({ min: 5 }),
+
+    (req, res) => {
+
+        const validationError = validator.validationResult(req);
+        console.log(req.body);
+        if (!validationError.isEmpty()) {
+            return res.status(500).send("Validation Errors");
+        }
+        Student.createSecure(req.body, (err, newUser) => {
+            console.log("New User: ", newUser);
+            //req.session.userId = newUser._id;
+            res.redirect("/students");
+        });
+    });
+
 app.get('/courses', (req, res) => {
 
     res.render("courses");
@@ -88,8 +107,8 @@ app.get('/timeline', (req, res) => {
 
 //**********  Controllers **********//
 // app.use(require("./controllers/studentCon"));
-// app.use(require("./controllers/instructorCon"));
-// app.use(require("./controllers/courseCon"));
+app.use(require("./controllers/instructorCon"));
+app.use(require("./controllers/courseCon"));
 
 
 //********** Start Server **********//

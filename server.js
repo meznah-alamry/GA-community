@@ -11,14 +11,14 @@ const validator = require("express-validator");
 //Session
 app.use(
     session({
-      store: new mongoSessisonStore({ mongooseConnection: mongoose.connection }),
-      saveUninitialized: true,
-      resave: true,
-      secret: "SuperSecretCookie",
-      cookie: { maxAge: 30 * 60 * 1000 },
+        store: new mongoSessisonStore({ mongooseConnection: mongoose.connection }),
+        saveUninitialized: true,
+        resave: true,
+        secret: "SuperSecretCookie",
+        cookie: { maxAge: 30 * 60 * 1000 },
     })
-  );
-app.set('view engine' , 'ejs');
+);
+app.set('view engine', 'ejs');
 
 
 // connect to database and pull in model(s)
@@ -32,12 +32,20 @@ mongoose.connect(
 app.use(express.static("public"));
 app.use(expressLayouts);
 
-app.get('/' , (req ,res ) => {
+app.get('/', (req, res) => {
 
-res.send("Main Page");
+    res.render("index");
 
-})
+});
+
+app.get('/home', (req, res) => {
+
+    res.render("home");
+
+});
+
+
 
 //Start Server
 let Port = 4000;
-app.listen(Port , () => console.log(`GA Community Server is Running on Port: ${Port} `));
+app.listen(Port, () => console.log(`GA Community Server is Running on Port: ${Port} `));

@@ -1,21 +1,21 @@
-var mongoose = require("mongoose"),
-    Schema = mongoose.Schema,
-    bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 
-var StudentSchema = new Schema({
+const StudentSchema = new Schema({
   email: {
     type: String,
     required: true,
-    index: {unique: true} // uniqueness constraint
+    index: { unique: true } // uniqueness constraint
   },
   passwordDigest: {
     type: String,
     required: true
   },
-  Studentname:String,
-  phonenumber:Number,
-  Course:[{type : mongoose.Schema.Types.ObjectId , ref : 'Student'  }],
+  Name: String,
+  Number: Number,
+  Course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }],
 
 });
 
@@ -41,12 +41,12 @@ StudentSchema.statics.createSecure = function (email, password, cb) {
 // authenticate user (for login)
 StudentSchema.statics.authenticate = function (email, password, cb) {
   // find user by email entered at log in
-  this.findOne({email: email}, function (err, user) {
+  this.findOne({ email: email }, function (err, user) {
     // throw error if can't find user
     console.log("Password: ", password);
     if (user === null) {
       cb("Can\'t find user with that email", null);
-    // if found user, check if password is correct
+      // if found user, check if password is correct
     } else if (user.checkPassword(password)) {
       // the user is found & password is correct, so execute callback
       // pass no error, just the user to the callback

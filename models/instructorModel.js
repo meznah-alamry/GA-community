@@ -1,18 +1,20 @@
-var mongoose = require("mongoose"),
-    Schema = mongoose.Schema,
-    var InstructorSchema = new Schema({
-        Fullname:String,
-        HiddenTalent:String,
-        Email:String,
-        Password:String,
-        NumberPhone:Number,
-        Description:String,
-        Rating:Number
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-    });
+const InstructorSchema = new Schema({
 
-    
-var Instructor = mongoose.model('Instructor', InstructorSchema);
+    Fullname: String,
+    HiddenTalent: String,
+    Email: String,
+    Password: String,
+    NumberPhone: Number,
+    Description: String,
+    Rating: Number
 
-module.exports =Instructor ;
+});
+
+
+const Instructor = mongoose.model('Instructor', InstructorSchema);
+
+module.exports = Instructor;
 

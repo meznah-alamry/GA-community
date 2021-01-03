@@ -3,7 +3,7 @@ var mongoose = require("mongoose"),
     bcrypt = require('bcrypt');
 
 
-var StudentsSchema = new Schema({
+var StudentSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -20,7 +20,7 @@ var StudentsSchema = new Schema({
 });
 
 // create a new user with secure (hashed) password (for sign up)
-StudentsSchema.statics.createSecure = function (email, password, cb) {
+StudentSchema.statics.createSecure = function (email, password, cb) {
   // `_this` now references our schema
   var _this = this;
   // generate some salt
@@ -39,7 +39,7 @@ StudentsSchema.statics.createSecure = function (email, password, cb) {
 };
 
 // authenticate user (for login)
-StudentsSchema.statics.authenticate = function (email, password, cb) {
+StudentSchema.statics.authenticate = function (email, password, cb) {
   // find user by email entered at log in
   this.findOne({email: email}, function (err, user) {
     // throw error if can't find user
@@ -59,7 +59,7 @@ StudentsSchema.statics.authenticate = function (email, password, cb) {
 };
 
 // compare password user enters with hashed password (`passwordDigest`)
-StudentsSchema.methods.checkPassword = function (password) {
+StudentSchema.methods.checkPassword = function (password) {
   // run hashing algorithm (with salt) on password to compare with stored `passwordDigest`
   // `compareSync` is like `compare` but synchronous
   // returns true or false
@@ -67,6 +67,6 @@ StudentsSchema.methods.checkPassword = function (password) {
 };
 
 
-var Student = mongoose.model('Student', StudentsSchema);
+var Student = mongoose.model('Student', StudentSchema);
 
 module.exports = Student;

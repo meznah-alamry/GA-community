@@ -14,11 +14,11 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
 
 ### Day-1
 - Wireframes ✔︎
-- HTML/CSS ×
+- HTML/CSS ✔︎
     * Ibrahim: splash, home, login
     * Rawan: signup, instructors, courses
     * Meznah: students, timeline
-- Models ×
+- Models ✔︎
     * students.js
         * Full Name
         * Email
@@ -38,9 +38,10 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
         * Length
         * Location
         * Description
-- Node/Express Initialization ×
+- Node/Express Initialization ✔︎
 - Current Status:
-![URL](./assets/progress/day_1.png)
+![URL](./assets/progress/day-1.png)
+
 ### Day-2
 
 ### Day-3

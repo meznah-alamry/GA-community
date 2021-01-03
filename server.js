@@ -45,6 +45,17 @@ app.get('/home', (req, res) => {
 });
 
 
+app.get('/students', (req, res) => {
+
+    res.render("students");
+
+});
+
+app.get('/timeline', (req, res) => {
+
+    res.render("timeline");
+
+});
 
 //Start Server
 let Port = 4000;

@@ -131,6 +131,7 @@ nav a:hover {
 
 .main {
     text-align: center;
+    height: 100%;
     /* margin: auto;
     width: 50%; */
 }
@@ -175,7 +176,11 @@ nav a:hover {
     font-family: monospace;
 }
 
+.inline {
+    display: inline;
+}
 
+/********** Cards **********/
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -195,3 +200,38 @@ nav a:hover {
     padding: 1px 16px;
 
   }
+  .card:last-child {
+    margin-bottom: 70px;
+
+  }
+/********** end of Cards **********/
+
+/********** Sign Up Cards **********/
+
+.signUpCards {
+    display: flex;
+    margin: auto;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+
+}
+.sCard {
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 250px;
+    cursor: pointer;
+
+  }
+  
+  .sCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
+  }
+  
+  .sContainer {
+    padding: 2px 16px;
+  }
+
+/********** end of Sign Up Cards **********/

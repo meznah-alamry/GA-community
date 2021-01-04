@@ -177,6 +177,7 @@ nav a:hover {
     transition: 0.3s;
     margin: auto;
     width: 60%;
+    cursor: pointer;
   }
   
   /* On mouse-over, add a deeper shadow */

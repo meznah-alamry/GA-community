@@ -1,18 +1,25 @@
 <head>
-    <title>Instructors</title>
+    <title>Profile</title>
 </head>
 <nav>
     <a href="/home">Home</a>
     |
-    <a href="/profile">Profile</a>
-    |
-    <a href="/logout">Logout</a>
-    |
+    <% if (userId){%>
+        <a href="/profile" class="selected">Profile</a>
+        |
+        <a href="/logout">Logout</a>
+        |
+<% } else { %>
+        <a href="/login">Login</a>
+        |
+        <a href="/signup">Sign Up</a>
+        |
+ <% } %>
     <a href="/instructors">Instructors</a>
     |
     <a href="/courses">Courses</a>
     |
-    <a href="/students" class="selected">Students</a>
+    <a href="/students">Students</a>
     |
     <a href="/timeline">General Timeline</a>
 </nav>
@@ -26,7 +33,8 @@
         </div>
         <div class="student-details">
             <p><b>Name:</b></p>
-            <p><b>Contact:</b></p>
+            <p><b>Email:</b></p>
+            <p><b>Number:</b></p>
         </div>
     </div>
 

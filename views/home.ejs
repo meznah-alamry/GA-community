@@ -5,17 +5,24 @@
 <nav>
     <a href="/home" class="selected">Home</a>
     |
-    <a href="/login">Login</a>
-    |
-    <a href="/signup">Sign Up</a>
-    |
-    <a href="/instructors">Instructors</a>
-    |
-    <a href="/courses">Courses</a>
-    |
-    <a href="/students">Students</a>
-    |
-    <a href="timeline">General Timeline</a>
+    <% if (userId){%>
+            <a href="/profile">Profile</a>
+            |
+            <a href="/logout">Logout</a>
+            |
+    <% } else { %>
+            <a href="/login">Login</a>
+            |
+            <a href="/signup">Sign Up</a>
+            |
+     <% } %>
+        <a href="/instructors">Instructors</a>
+        |
+        <a href="/courses">Courses</a>
+        |
+        <a href="/students">Students</a>
+        |
+        <a href="timeline">General Timeline</a>
 </nav>
 
 <div class="container">
@@ -35,7 +42,7 @@
             <ul class="list">
                 <li>~ Ibrahim Shaheen</li>
                 <br>
-                <li>~ Rawan AlOmairy</li>
+                <li>~ Rawan AlOmair</li>
                 <br>
                 <li>~ Meznah AlAmry</li>
             </ul>

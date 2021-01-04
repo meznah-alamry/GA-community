@@ -43,7 +43,12 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
 ![URL](./assets/progress/day-1.png)
 
 ### Day-2
-
+- Login/Sign Up/Logout Functioning ✔︎
+- User's Profile ✔︎
+- Students Profiles ✔︎
+- Sign Up for Instructors
+- Instructors Profiles
+- Instructor Rating System
 ### Day-3
 
 ### Day-4

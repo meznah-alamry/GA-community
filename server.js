@@ -6,6 +6,7 @@ const session = require("express-session");
 const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
+const path = require('path');
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,7 +38,7 @@ mongoose.connect(
 );
 
 //********** Using Layouts and "Public Folder" **********/
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(expressLayouts);
 
 //********** Index & Home **********//

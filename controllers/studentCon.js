@@ -27,13 +27,18 @@ router.use(
 // Students List
 router.get('/students', (req, res) => {
 
-    // Student.find()
-    // .then(students => {
-    //     res.render('students/students',{ userId: req.session.userId }, { students: students })
-    // })
-    // .catch((err) => console.log(err));
+    var userId = req.session.userId;
 
-    res.render("students/students",{ userId: req.session.userId });
+    Student.find()
+    .then(students => {
+        res.render('students/students',{students, userId});
+        console.log("Session ID: ",req.session.userId);
+    }).catch((err) =>{
+        console.log(err);
+        res.status(500).send("Error!")
+    });
+
+    // res.render("students/students",{ userId: req.session.userId });
 
 });
 
@@ -68,7 +73,20 @@ router.get('/profile', (req, res) =>{
         console.log(err);
         res.status(500).send("Error!")
     });
-})
+});
+
+// Students Profile
+router.get('/students/:id', (req, res) =>{
+    
+    const id = req.params.id
+    Student.findById(id)
+    .then(students => {
+        res.render('students/profile',{students, userId: req.session.userId});
+    }).catch((err) =>{
+        console.log(err);
+        res.status(500).send("Error!")
+    });
+});
 
 
 

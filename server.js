@@ -7,8 +7,9 @@ const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 
+
 //********** Models **********//
-// app.use(require("./models/studentModel"));
+const Student = require("./models/studentModel");
 // app.use(require("./models/instructorModel"));
 // app.use(require("./models/courseModel"));
 

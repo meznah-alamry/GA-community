@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //********** Models **********//
 const Student = require("./models/studentModel");
-// app.use(require("./models/instructorModel"));
-// app.use(require("./models/courseModel"));
+ //const IInstructor =require("./models/instructorModel");
+  //app.use(require("./models/courseModel"));
 
 //********** Session **********//
 app.use(

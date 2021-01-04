@@ -4,7 +4,7 @@
 <nav>
     <a href="/home">Home</a>
     |
-    <% if (userId){%>
+    <% if (student._id){%>
         <a href="/profile" class="selected">Profile</a>
         |
         <a href="/logout">Logout</a>
@@ -32,9 +32,9 @@
             alt="">
         </div>
         <div class="student-details">
-            <p><b>Name:</b></p>
-            <p><b>Email:</b></p>
-            <p><b>Number:</b></p>
+            <p><b>Name:</b> <%= student.name %> </p>
+            <p><b>Email:</b> <%= student.email %> </p>
+            <p><b>Number:</b> <%= student.number %></p>
         </div>
     </div>
 

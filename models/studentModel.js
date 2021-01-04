@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 const StudentSchema = new Schema({
-  Name: String,
+  name: String,
   email: {
     type: String,
     required: true,
@@ -14,7 +14,7 @@ const StudentSchema = new Schema({
     type: String,
     required: true
   },
-  Number: Number,
+  number: Number,
   Course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }],
 
 });

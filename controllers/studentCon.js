@@ -59,15 +59,15 @@ router.post(
 );
 
 // User's Profile
-router.get('/profile',(req, res) =>{
-
-    // Student.find()
-    // .then(student => {
-    //     res.render('profile',{userId : req.session.userId},{student : student});
-    // }).catch(err => console.log(err));
-
-    res.render("profile", { userId: req.session.userId });
-
+router.get('/profile', (req, res) =>{
+    const userId = req.session.userId
+    Student.findById(userId)
+    .then(student => {
+        res.render('profile',{student});
+    }).catch((err) =>{
+        console.log(err);
+        res.status(500).send("Error!")
+    });
 })
 
 

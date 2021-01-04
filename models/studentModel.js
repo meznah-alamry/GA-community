@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 const StudentSchema = new Schema({
-  Name: String,
+  name: String,
   email: {
     type: String,
     required: true,
@@ -14,8 +14,8 @@ const StudentSchema = new Schema({
     type: String,
     required: true
   },
-  Number: Number,
-  Course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }],
+  number: Number,
+  course: Array,
 
 });
 
@@ -38,7 +38,7 @@ StudentSchema.statics.createSecure = (body, callback) => {
         passwordDigest: hash,
         name: body.name,
         number: body.number,
-        course: body.course1+body.course2+body.course3
+        $push: {course: body.course}
       },callback);
     });
   });

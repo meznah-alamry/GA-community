@@ -2,17 +2,7 @@
   "name": "My-GA-Community",
   "version": "1.0.0",
   "description": "a Simple Community for GA Instructors and Students. contains profile pages for students and instructors, information pages for GA courses, comment/discussion section and a star rating system for both instructors and courses. It also contains a Timeline that allows registered users to post in.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://git.generalassemb.ly/Psi-Project-2/My-GA-Community"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "main": "server.js",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
@@ -23,8 +13,20 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.1",
-    "express-validator": "^6.9.0",
+    "express-validator": "^6.9.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.11.9"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.generalassemb.ly/Psi-Project-2/My-GA-Community.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -8,9 +8,19 @@ const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 
 //********** Models **********//
+const Student = require("./models/studentModel");
 // app.use(require("./models/studentModel"));
 // app.use(require("./models/instructorModel"));
 // app.use(require("./models/courseModel"));
+
+
+// parse incoming urlencoded form data in the HTTP Body
+// and populate the req.body object
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
 
 //********** Session **********//
 app.use(

@@ -21,7 +21,6 @@ const InstructorSchema = new Schema({
     role: String
 });
 
-
 InstructorSchema.statics.createSecure = (body, callback) => {
 
     console.log("I received this email, password:");
@@ -80,5 +79,6 @@ InstructorSchema.methods.checkPassword = function (password) {
 
 const Instructor = mongoose.model('Instructor', InstructorSchema);
 
-module.exports = Instructor;
+
+module.exports = instructor;
 

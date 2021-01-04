@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 const StudentSchema = new Schema({
-  Name: String,
+  name: String,
   email: {
     type: String,
     required: true,
@@ -14,8 +14,8 @@ const StudentSchema = new Schema({
     type: String,
     required: true
   },
-  Number: Number,
-  Course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }],
+  number: Number,
+  course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }],
 
 });
 
@@ -38,7 +38,7 @@ StudentSchema.statics.createSecure = (body, callback) => {
         passwordDigest: hash,
         name: body.name,
         number: body.number,
-        course: body.course1+body.course2+body.course3
+        course: body.course
       },callback);
     });
   });
@@ -71,8 +71,6 @@ StudentSchema.methods.checkPassword = function (password) {
   // returns true or false
   return bcrypt.compareSync(password, this.passwordDigest);
 };
-
-
 
 
 var Student = mongoose.model('Student', StudentSchema);

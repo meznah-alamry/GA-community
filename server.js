@@ -7,8 +7,12 @@ const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 //********** Models **********//
-// app.use(require("./models/studentModel"));
+const Student = require("./models/studentModel");
 // app.use(require("./models/instructorModel"));
 // app.use(require("./models/courseModel"));
 
@@ -44,18 +48,34 @@ app.get('/', (req, res) => {
 });
 app.get('/home', (req, res) => {
 
-    res.render("home");
+    res.render("home", {userId: req.session.userId});
 
 });
 
-//********** Login & Sign Up **********//
+//********** Login - Sign Up - Logout **********//
 app.get('/login', (req, res) => {
 
-    if (req.session.userId) {
-        res.render("logged")
-    } else {
         res.render("login");
+
+});
+app.post('/sessions', (req, res) => {
+
+    console.log("Login info in clear text: ")
+    console.log("Entered Email: ", req.body.email);
+    console.log("Entered Password: ", req.body.password);
+
+    // call authenticate function to check if password user entered is correct
+    Student.authenticate(req.body.email, req.body.password, (err, foundUser) => {
+        if (err) {
+            console.log("authentication error: ", err);
+            res.status(500).send(err);
+        } else {
+            console.log("setting sesstion user id ", foundUser._id);
+            req.session.userId = foundUser._id;
+            res.redirect("/home");
+        }
     }
+    );
 
 });
 app.get('/signup', (req, res) => {
@@ -63,50 +83,23 @@ app.get('/signup', (req, res) => {
     res.render("signup");
 
 });
+app.get('/logout', (req, res) => {
+
+    req.session.userId = null;
+    res.render("login");
+
+});
 
 //********** Other Pages **********//
-app.get('/instructors', (req, res) => {
 
-    res.render("instructors/instructors");
-
-});
-app.get('/students', (req, res) => {
-
-    res.render("students/students");
-
-});
-app.post(
-    "/students",
-    validator.body('email').isEmail(),
-    validator.body('password').isLength({ min: 5 }),
-
-    (req, res) => {
-
-        const validationError = validator.validationResult(req);
-        console.log(req.body);
-        if (!validationError.isEmpty()) {
-            return res.status(500).send("Validation Errors");
-        }
-        Student.createSecure(req.body, (err, newUser) => {
-            console.log("New User: ", newUser);
-            //req.session.userId = newUser._id;
-            res.redirect("/students");
-        });
-    });
-
-app.get('/courses', (req, res) => {
-
-    res.render("courses");
-
-});
 app.get('/timeline', (req, res) => {
 
-    res.render("timeline");
+    res.render("timeline", {userId: req.session.userId});
 
 });
 
 //**********  Controllers **********//
-// app.use(require("./controllers/studentCon"));
+app.use(require("./controllers/studentCon"));
 app.use(require("./controllers/instructorCon"));
 app.use(require("./controllers/courseCon"));
 

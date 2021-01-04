@@ -1,11 +1,11 @@
 <head>
-    <title>Student</title>
+    <title>Profile</title>
 </head>
 <nav>
     <a href="/home">Home</a>
     |
     <% if (userId){%>
-        <a href="/profile">Profile</a>
+        <a href="/profile" class="selected">Profile</a>
         |
         <a href="/logout">Logout</a>
         |
@@ -19,7 +19,7 @@
     |
     <a href="/courses">Courses</a>
     |
-    <a href="/students" class="selected">Students</a>
+    <a href="/students">Students</a>
     |
     <a href="/timeline">General Timeline</a>
 </nav>
@@ -33,7 +33,8 @@
         </div>
         <div class="student-details">
             <p><b>Name:</b></p>
-            <p><b>Contact:</b></p>
+            <p><b>Email:</b></p>
+            <p><b>Number:</b></p>
         </div>
     </div>
 

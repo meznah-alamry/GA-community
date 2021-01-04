@@ -27,13 +27,13 @@ router.use(
 // Students List
 router.get('/students', (req, res) => {
 
-    // Student.find()
-    // .then(students => {
-    //     res.render('students/students',{ userId: req.session.userId }, { students: students })
-    // })
-    // .catch((err) => console.log(err));
+    Student.find()
+    .then(students => {
+        res.render('students/students',{ userId: req.session.userId, students: students })
+    })
+    .catch((err) => console.log(err));
 
-    res.render("students/students",{ userId: req.session.userId });
+    // res.render("students/students",{ userId: req.session.userId });
 
 });
 

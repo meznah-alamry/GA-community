@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const Student = require("./models/studentModel");
 // app.use(require("./models/instructorModel"));
 // app.use(require("./models/courseModel"));
+const Timeline = require("./models/timelineModel");
 
 
 // parse incoming urlencoded form data in the HTTP Body
@@ -102,10 +103,26 @@ app.get('/logout', (req, res) => {
 //********** Other Pages **********//
 
 app.get('/timeline', (req, res) => {
+    Student.find()
+    .then((users) => {
+        Timeline.find().populate('user').sort({content:-1})
+            .then((messages) => {
+                res.render("timeline", {users, messages, userId: req.session.userId});
+            })
+    }
 
-    res.render("timeline", {userId: req.session.userId});
+    )
 
 });
+
+app.post('/timeline', (req, res) => {
+    Timeline.create(
+        {user: req.session.userId, content:req.body.timeline})
+    .then(timeline =>{
+        res.redirect('/timeline')
+    }).catch(err =>console.log(err));
+});
+
 
 //**********  Controllers **********//
 app.use(require("./controllers/studentCon"));

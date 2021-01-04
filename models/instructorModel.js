@@ -14,7 +14,8 @@ const InstructorSchema = new Schema({
 });
 
 
-const Instructor = mongoose.model('Instructor', InstructorSchema);
 
+
+const Instructor = mongoose.model('Instructor', InstructorSchema);
 module.exports = Instructor;
 

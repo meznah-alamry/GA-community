@@ -7,6 +7,7 @@ const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 const Student = require('../models/studentModel');
+const Instructor = require("../models/instructorModel");
 
 var bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -42,7 +43,13 @@ router.get('/students', (req, res) => {
 
 });
 
-// Create New Student
+// Student Sign Up (GET)
+router.get('/students/signup', (req, res) => {
+
+    res.render("students/signup");
+
+});
+// Student Sign Up (POST)
 router.post(
     "/students",
     validator.body('email').isEmail(),
@@ -63,16 +70,46 @@ router.post(
     }
 );
 
-// User's Profile
+// Student Login (GET)
+router.get('/students/login', (req, res) => {
+
+    res.render("students/login");
+
+});
+
+// Student Login (POST)
+router.post('/students/sessions', (req, res) => {
+
+    console.log("Login info in clear text: ")
+    console.log("Entered Email: ", req.body.email);
+    console.log("Entered Password: ", req.body.password);
+
+    // call authenticate function to check if password user entered is correct
+    Student.authenticate(req.body.email, req.body.password, (err, foundUser) => {
+        if (err) {
+            console.log("authentication error: ", err);
+            res.status(500).send(err);
+        } else {
+            console.log("setting sesstion user id ", foundUser._id);
+            req.session.userId = foundUser._id;
+            res.redirect("/home");
+        }
+    }
+    );
+});
+
+// User (as Student) Profile
 router.get('/profile', (req, res) =>{
+
     const userId = req.session.userId
     Student.findById(userId)
     .then(student => {
-        res.render('profile',{student});
+        res.render('profile',{student, userId});
     }).catch((err) =>{
         console.log(err);
         res.status(500).send("Error!")
     });
+    
 });
 
 // Students Profile

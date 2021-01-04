@@ -59,26 +59,6 @@ app.get('/login', (req, res) => {
         res.render("login");
 
 });
-app.post('/sessions', (req, res) => {
-
-    console.log("Login info in clear text: ")
-    console.log("Entered Email: ", req.body.email);
-    console.log("Entered Password: ", req.body.password);
-
-    // call authenticate function to check if password user entered is correct
-    Student.authenticate(req.body.email, req.body.password, (err, foundUser) => {
-        if (err) {
-            console.log("authentication error: ", err);
-            res.status(500).send(err);
-        } else {
-            console.log("setting sesstion user id ", foundUser._id);
-            req.session.userId = foundUser._id;
-            res.redirect("/home");
-        }
-    }
-    );
-
-});
 app.get('/signup', (req, res) => {
 
     res.render("signup");

@@ -15,7 +15,7 @@ const StudentSchema = new Schema({
     required: true
   },
   number: Number,
-  course: Array,
+  course: [{}],
 
 });
 
@@ -33,12 +33,14 @@ StudentSchema.statics.createSecure = (body, callback) => {
       console.log("hash: ",hash)
 
       // create a new user in the db with hashed password and execute the callback when done
+      const cuorseArr = body.course;
+      console.log("course array", cuorseArr)
       Student.create({
         email: body.email,
         passwordDigest: hash,
         name: body.name,
         number: body.number,
-        $push: {course: body.course}
+        course: body.course
       },callback);
     });
   });
@@ -71,8 +73,6 @@ StudentSchema.methods.checkPassword = function (password) {
   // returns true or false
   return bcrypt.compareSync(password, this.passwordDigest);
 };
-
-
 
 
 var Student = mongoose.model('Student', StudentSchema);

@@ -15,7 +15,7 @@ const StudentSchema = new Schema({
     required: true
   },
   number: Number,
-  course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }],
+  course: [{}],
 
 });
 

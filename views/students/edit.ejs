@@ -1,5 +1,5 @@
 <head>
-    <title>Profile</title>
+    <title>Edit Profile</title>
 </head>
 <nav>
     <a href="/home">Home</a>
@@ -32,20 +32,25 @@
                 alt="">
         </div>
         <div class="student-details">
+            <form action="/profile/<%= student.id %>?_method=put" method="POST">
             <p><b>Name:</b>
-                <%= student.name %>
+                <input type="text" name="name" value="<%= student.name %>"/>
+                
             </p>
             <p><b>Email:</b>
-                <%= student.email %>
+                <input type="text" name="email" value="<%= student.email %>"/>
+
             </p>
             <p><b>Number:</b>
-                <%= student.number %>
+                <input type="text" name="number" value="<%= student.number %>"/>
+
             </p>
         </div>
     </div>
 
     <div class="students-courses">
-        <p><b>Enrolled in:</b></p>
+
+        <p><b>Contact Management to Change Courses!</b></p>
         <ul>
             <% for(let i=0; i<student.course.length; i++){ %>
 
@@ -58,7 +63,8 @@
 </div>
 
 <div class="main">
-    <a href="/profile/<%= student.id %>/edit">
-    <button class="button">Edit Profile</button>
-    </a>
+
+    <input type="submit" class="button" value="Save">
+
 </div>
+</form>

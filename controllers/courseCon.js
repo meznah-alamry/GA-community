@@ -24,6 +24,7 @@ router.use(
 
 //***************************** Routes *****************************//
 
+// All Courses
 router.get('/courses', (req, res) => {
 
     const userId = req.session.userId;
@@ -33,14 +34,19 @@ router.get('/courses', (req, res) => {
 
 });
 
+// Course Details
 router.get('/courses/:id', (req, res) => {
 
-    
-    
     res.render("courses/courses", {userId: req.session.userId});
 
 });
 
+// Create New Course (GET)
+router.get('/courses/new', (req, res) => {
+
+    res.render("courses/new", {userId: req.session.userId});
+
+});
 
 
 

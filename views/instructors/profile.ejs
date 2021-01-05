@@ -9,46 +9,90 @@
         |
         <a href="/logout">Logout</a>
         |
-<% } else { %>
-        <a href="/login">Login</a>
-        |
-        <a href="/signup">Sign Up</a>
-        |
- <% } %>
-    <a href="/instructors"class="selected">Instructors</a>
-    |
-    <a href="/courses">Courses</a>
-    |
-    <a href="/students" >Students</a>
-    |
-    <a href="/timeline">General Timeline</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+            |
+            <a href="/signup">Sign Up</a>
+            |
+            <% } %>
+                <a href="/instructors" class="selected">Instructors</a>
+                |
+                <a href="/courses">Courses</a>
+                |
+                <a href="/students">Students</a>
+                |
+                <a href="/timeline">General Timeline</a>
 </nav>
 
 
 <div class="students-container">
     <div class="students-info">
         <div class="students-img">
-             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-            alt="">
+            <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
+                alt="">
         </div>
         <div class="student-details">
-            <p><b>Name:</b> <%= instructors.name %></p>
-            <p><b>Hidden Talent:</b> <%= instructors.talent %></p>
-            <p><b>Email:</b> <%= instructors.email %></p>
-            <p><b>Course:</b> <%= instructors.course %> - <%= instructors.role %></p>
+            <p><b>Name:</b>
+                <%= instructors.name %>
+            </p>
+            <p><b>Hidden Talent:</b>
+                <%= instructors.talent %>
+            </p>
+            <p><b>Email:</b>
+                <%= instructors.email %>
+            </p>
+            <p><b>Course:</b>
+                <%= instructors.course %> - <%= instructors.role %>
+            </p>
 
         </div>
     </div>
 
-<div class="students-courses">
-    <p><b>Rating:</b></p>
-    <select name="rating">
-        <option value="1">1</option>
-        <option value="1">2</option>
-        <option value="1">3</option>
-        <option value="1">4</option>
-        <option value="1">5</option>
-    </select>
-</div>
+    <div class="students-courses">
+
+        <% let avg = Math.floor((instructors.rating.reduce((a,b)=> a+b, 0))/instructors.rating.length) %>
+        <% let stars= "" %>
+        <% switch(avg) { 
+            case 0 : 
+            stars = "☆☆☆☆☆"
+            break; 
+
+            case 1 : 
+            stars = "★☆☆☆☆" 
+            break; 
+
+            case 2 : 
+            stars = "★★☆☆☆"
+            break;
+
+            case 3 : 
+            stars = "★★★☆☆" 
+            break;
+
+            case 4 : 
+            stars = "★★★★☆" 
+            break;
+
+            case 5 : 
+            stars = "★★★★★" 
+            break;
+        } %>
+        <p><b>Rating:</b> <%= stars %> </p>
+                            
+                        
+        <% if(userId){%>
+        <form action="/instructors/<%= instructors.id %>/rate" method="POST">
+            <input class="button" type="submit" value="Rate">
+            <select class ="rating" name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </form>
+        <% } %>
+
+    </div>
 
 </div>

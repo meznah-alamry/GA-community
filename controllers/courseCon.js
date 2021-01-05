@@ -26,7 +26,10 @@ router.use(
 
 router.get('/courses', (req, res) => {
 
-    res.render("courses/courses", {userId: req.session.userId});
+    const userId = req.session.userId;
+    const userType = req.session.userType;
+
+    res.render("courses/courses", {userId,userType });
 
 });
 

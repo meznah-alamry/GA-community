@@ -144,6 +144,14 @@ nav a:hover {
     cursor: pointer;
 }
 
+.rating {
+    font-size: 20px;
+    width: 50px;
+    text-align: center;
+    background-color: white;
+    font-family: 'Anton', sans-serif;
+}
+
 .textField {
     width: 200px;
     height: 30px;

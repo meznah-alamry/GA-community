@@ -1,0 +1,58 @@
+<head>
+    <title>New Course</title>
+</head>
+
+<nav>
+    <a href="/home">Home</a>
+    |
+    <% if (userId){%>
+        <a href="/profile">Profile</a>
+        |
+        <a href="/logout">Logout</a>
+        |
+        <% } else { %>
+            <a href="/login">Login</a>
+            |
+            <a href="/signup">Sign Up</a>
+            |
+            <% } %>
+                <a href="/instructors">Instructors</a>
+                |
+                <a href="/courses" class="selected">Courses</a>
+                |
+                <a href="/students">Students</a>
+                |
+                <a href="timeline">General Timeline</a>
+</nav>
+
+<div class="main">
+
+    <h2 class="title">Create Course</h2>
+
+    <form action="/courses" class="form" method="POST">
+    
+        <p>Course Name</p>
+        <input type="text" placeholder="course name" name="name">
+
+        <p>Length, Location & Type</p>
+        <select name="length">
+            <option value="12-Week">12-Week</option>
+            <option value="6-Week">6-Week</option>
+        </select>
+        <select name="location">
+            <option value="Online">Online</option>
+            <option value="Campus">Campus</option>
+        </select>
+        <select name="type">
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+        </select>
+        <p>Total Hours</p>
+        <input type="number" placeholder="hours" name="hours">
+
+        <p>Description</p>
+        <textarea class="courseDesc" type="text" placeholder="description" name="description"></textarea>
+        <br><br>
+        <input type="submit" class="button" value="Create">
+    </form>
+</div>

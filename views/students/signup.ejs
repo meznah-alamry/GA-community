@@ -33,15 +33,15 @@
         <p>Phone Number</p>
         <input type="tel" id="phone" name="number" placeholder="966556677889">
 
-        <p>Courses:</p>
-        <input type="checkbox" name="course" value="Software Engineering Immersive (SEI)">
-        <label for="course">Software Engineering Immersive</label><br>
+        <p>Course</p>
 
-        <input type="checkbox" name="course" value="Data Science Immersive (DSI)">
-        <label for="course">Data Science Immersive</label><br>
-
-        <input type="checkbox" name="course" value="User Experience Design Immersive (UEDI)">
-        <label for="course"> User Experience Design Immersive</label>
+        <select name="course">
+            <% courses.forEach((el,i) => { %>
+                <option value="<%= el.name %>"><%= el.name %></option>
+          <%  }) %>
+            
+        </select>
+        
         <br>
         <br>
         <input class="button" type="submit" value="Submit">

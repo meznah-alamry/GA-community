@@ -37,9 +37,9 @@
         <br>
         <p class="inline">Course</p>
         <select name="course">
-            <option value="Software Engineering Immersive">Software Engineering Immersive</option>
-            <option value="Data Science Immersive">Data Science Immersive</option>
-            <option value="User Experience Design Immersive">User Experience Design Immersive</option>
+            <% courses.forEach((el,i) => { %>
+                <option value="<%= el.name %>"><%= el.name %></option>
+          <%  }) %>  
         </select>
         <p class="inline">Role</p>
         <select name="role">

@@ -6,8 +6,9 @@ const CourseSchema = new Schema({
     name: String,
     length: String,
     location: String,
-    description: String
-    
+    description: String,
+    hours: Number,
+    type: String
 });
 
 

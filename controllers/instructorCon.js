@@ -8,6 +8,8 @@ const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 const Instructor = require("../models/instructorModel");
 const Student = require("../models/studentModel");
+const Course = require("../models/courseModel");
+
 
 var bodyParser = require("body-parser");
 const { body } = require('express-validator');
@@ -43,7 +45,11 @@ router.get('/instructors', (req, res) => {
 // Instructors Sign Up (GET)
 router.get('/instructors/signup', (req, res) => {
 
-    res.render("instructors/signup");
+    Course.find()
+    .then(courses => {
+        res.render("instructors/signup", {courses});
+    }).catch(err => console.log(err));
+
 
 });
 // Instructors Sign Up (POST)

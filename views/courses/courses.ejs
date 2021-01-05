@@ -27,9 +27,11 @@
 
 <div class="main">
     <h2 class="title">Courses</h2>
+    <% if(userType==="Instructor"){%>
     <a href="/courses/new"><button class="button">Create Course</button></a>
     <br>
     <br>
+    <% } %>
     <div class="card">
         <div class="cardContainer">
             <h4><b>Software Engineering Immersive</b></h4>

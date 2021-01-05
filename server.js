@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //********** Models **********//
 const Student = require("./models/studentModel");
+const Instructor = require('./models/instructorModel');
  //const IInstructor =require("./models/instructorModel");
   //app.use(require("./models/courseModel"));
 
@@ -77,6 +78,30 @@ app.get('/timeline', (req, res) => {
 
     res.render("timeline", {userId: req.session.userId});
 
+});
+app.get('/profile', (req, res) =>{
+
+    const userId = req.session.userId
+    const userType = req.session.userType
+
+    if(userType==="Instructor"){
+        Instructor.findById(userId)
+        .then(instructor => {
+            res.render('profile-instructor',{instructor, userId});
+        }).catch((err) =>{
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+    }else if(userType==="Student"){
+        Student.findById(userId)
+        .then(student => {
+            res.render('profile-student',{student, userId});
+        }).catch((err) =>{
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+    }
+    console.log(userType);
 });
 
 //**********  Controllers **********//

@@ -92,24 +92,11 @@ router.post('/students/sessions', (req, res) => {
         } else {
             console.log("setting sesstion user id ", foundUser._id);
             req.session.userId = foundUser._id;
+            req.session.userType = "Student";
             res.redirect("/home");
         }
     }
     );
-});
-
-// User (as Student) Profile
-router.get('/profile', (req, res) =>{
-
-    const userId = req.session.userId
-    Student.findById(userId)
-    .then(student => {
-        res.render('profile',{student, userId});
-    }).catch((err) =>{
-        console.log(err);
-        res.status(500).send("Error!")
-    });
-    
 });
 
 // Students Profile

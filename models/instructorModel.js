@@ -17,7 +17,7 @@ const InstructorSchema = new Schema({
     },
     number: Number,
     course: String,
-    rating: Number,
+    rating: [{type: Number}],
     role: String
 });
 

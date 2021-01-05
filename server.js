@@ -13,11 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //********** Models **********//
-const Student = require("./models/studentModel");
-const Instructor = require("./models/instructorModel");
 // app.use(require("./models/instructorModel"));
 // app.use(require("./models/courseModel"));
-const Timeline = require("./models/timelineModel");
 
 
 // parse incoming urlencoded form data in the HTTP Body
@@ -85,38 +82,13 @@ app.get('/logout', (req, res) => {
 
 //********** Other Pages **********//
 
-app.get('/timeline', (req, res) => {
-
-
-Timeline.find()
-    .populate('Student')
-    .populate('Instructor')
-    .populate('user')
-            .then((messages) => {
-                
-                res.render("timeline", {messages, userId: req.session.userId});
-            })
-
-        
-
-});
-
-app.post('/timeline', (req, res) => {
-    // let name = Instructor.findById(req.session.userId);
-    // console.log(name)
-    Timeline.create(
-        {user: req.session.userId, content:req.body.timeline})
-    .then(timeline =>{
-        res.redirect('/timeline')
-        
-    }).catch(err =>console.log(err));
-});
 
 
 //**********  Controllers **********//
 app.use(require("./controllers/studentCon"));
 app.use(require("./controllers/instructorCon"));
 app.use(require("./controllers/courseCon"));
+app.use(require("./controllers/timelineCon"));
 
 
 //********** Start Server **********//

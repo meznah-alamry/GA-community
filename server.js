@@ -6,6 +6,7 @@ const session = require("express-session");
 const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
+const path = require('path');
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //********** Models **********//
 const Student = require("./models/studentModel");
+const Instructor = require("./models/instructorModel");
 // app.use(require("./models/instructorModel"));
 // app.use(require("./models/courseModel"));
 const Timeline = require("./models/timelineModel");
@@ -21,6 +23,7 @@ const Timeline = require("./models/timelineModel");
 // parse incoming urlencoded form data in the HTTP Body
 // and populate the req.body object
 var bodyParser = require("body-parser");
+const { userInfo } = require('os');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -47,7 +50,7 @@ mongoose.connect(
 );
 
 //********** Using Layouts and "Public Folder" **********/
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(expressLayouts);
 
 //********** Index & Home **********//
@@ -68,26 +71,6 @@ app.get('/login', (req, res) => {
         res.render("login");
 
 });
-app.post('/sessions', (req, res) => {
-
-    console.log("Login info in clear text: ")
-    console.log("Entered Email: ", req.body.email);
-    console.log("Entered Password: ", req.body.password);
-
-    // call authenticate function to check if password user entered is correct
-    Student.authenticate(req.body.email, req.body.password, (err, foundUser) => {
-        if (err) {
-            console.log("authentication error: ", err);
-            res.status(500).send(err);
-        } else {
-            console.log("setting sesstion user id ", foundUser._id);
-            req.session.userId = foundUser._id;
-            res.redirect("/home");
-        }
-    }
-    );
-
-});
 app.get('/signup', (req, res) => {
 
     res.render("signup");
@@ -103,23 +86,29 @@ app.get('/logout', (req, res) => {
 //********** Other Pages **********//
 
 app.get('/timeline', (req, res) => {
-    Student.find()
-    .then((users) => {
-        Timeline.find().populate('user').sort({content:-1})
-            .then((messages) => {
-                res.render("timeline", {users, messages, userId: req.session.userId});
-            })
-    }
 
-    )
+
+Timeline.find()
+    .populate('Student')
+    .populate('Instructor')
+    .populate('user')
+            .then((messages) => {
+                
+                res.render("timeline", {messages, userId: req.session.userId});
+            })
+
+        
 
 });
 
 app.post('/timeline', (req, res) => {
+    // let name = Instructor.findById(req.session.userId);
+    // console.log(name)
     Timeline.create(
         {user: req.session.userId, content:req.body.timeline})
     .then(timeline =>{
         res.redirect('/timeline')
+        
     }).catch(err =>console.log(err));
 });
 

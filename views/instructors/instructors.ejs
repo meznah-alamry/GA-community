@@ -10,31 +10,40 @@
         |
         <a href="/logout">Logout</a>
         |
-<% } else { %>
-        <a href="/login">Login</a>
-        |
-        <a href="/signup">Sign Up</a>
-        |
- <% } %>
-    <a href="/instructors" class="selected">Instructors</a>
-    |
-    <a href="/courses">Courses</a>
-    |
-    <a href="/students">Students</a>
-    |
-    <a href="timeline">General Timeline</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+            |
+            <a href="/signup">Sign Up</a>
+            |
+            <% } %>
+                <a href="/instructors" class="selected">Instructors</a>
+                |
+                <a href="/courses">Courses</a>
+                |
+                <a href="/students">Students</a>
+                |
+                <a href="timeline">General Timeline</a>
 </nav>
 
 <div class="main">
     <h2 class="title">Instructors</h2>
-   
-    <div class="card">
-        <div class="cardContainer">
-            <h4><b>Marco Santonastasi - LI</b></h4>
-            <p>Software Engineering Immersive</p>
+    <% instructors.forEach((el,i)=> {%>
+
+        <div class="card">
+            <a href="/instructors/<%= el.id %>">
+                <div class="cardContainer">
+                    <h4><b>
+                            <%= el.name %> - <%= el.role %>
+                        </b></h4>
+                    <p>
+                        <%= el.course %>
+                    </p>
+                </div>
+            </a>
         </div>
-    </div>
-    <div class="card">
+
+        <% }) %>
+            <!-- <div class="card">
         <div class="cardContainer">
             <h4><b>Yasir AlMuhtrish - JLI</b></h4>
             <p>Software Engineering Immersive</p>
@@ -51,6 +60,6 @@
             <h4><b>Ali Hamidaddin - IA</b></h4>
             <p>Software Engineering Immersive</p>
         </div>
-    </div>
+    </div> -->
 
 </div>

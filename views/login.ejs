@@ -17,19 +17,29 @@
     |
     <a href="timeline">General Timeline</a>
 </nav>
-
 <div class="main">
+    <h2 class="loginSignup">Choose Login Type</h2>
+    <br>
+    <br>
+    <div class="signUpCards">
 
-    <form id="login-form" method="POST" action="/sessions">
-        <br>
-        <h2 class="loginSignup"> Email: </h2>
-        <input type="text" name="email" class="textField" placeholder="Email" autofocus>
+        <div class="sCard">
+            <a href="/students/login">
+                <img width="200" height="200" src="/img/student.png">
 
-        <h2 class="loginSignup"> Password: </h2>
-        <input type="password" name="password" class="textField" placeholder="Password">
-        <br>
-        <br>
-        <input type="submit" value="Log In" class="button">
-    </form>
+                <div class="sContainer">
+                    <h4><b>Student</b></h4>
+                </div>
+            </a>
+        </div>
 
+        <div class="sCard">
+            <a href="/instructors/login">
+                <img width="200" height="200" src="/img/teacher.png">
+                <div class="sContainer">
+                    <h4><b>Instructor</b></h4>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>

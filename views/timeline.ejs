@@ -27,12 +27,13 @@
 <div class="main">
     <h2 class="title">Timeline</h2>
 </div>
-<div>
+<div class="timeline-form">
     <form method="POST" action="/timeline">
         <input type="text" name="timeline" class="timeline" placeholder="Type Your Message">
-    
-        <input type="submit" value="Send">
-    
+        <br>
+        <div class="timeline-send-btn">
+        <input type="submit" class="button" value="Send">
+        </div>
     </form>
     </div>
 <div class="timeline-container">
@@ -44,7 +45,7 @@
             alt="">
         </div>    
         <div class="timeline-details">
-            <p><b> <%= message.user.name %> </b></p>
+            <p><b> <%= message.user %> </b></p>
             <p> <%= message.content %> </p>
         </div>
     </div>

@@ -7,7 +7,7 @@ const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 const Instructor = require("../models/instructorModel");
-// const Student = require("../models/studentModel");
+const Student = require("../models/studentModel");
 
 var bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -26,10 +26,101 @@ router.use(
 
 //***************************** Routes *****************************//
 
+// Instructors List
 router.get('/instructors', (req, res) => {
 
-        res.render("instructors/instructors", {userId: req.session.userId});
-   
+    var userId = req.session.userId;
+
+    Instructor.find()
+        .then(instructors => {
+            res.render('instructors/instructors', { instructors, userId });
+            console.log("Session ID: ", req.session.userId);
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+});
+
+// Instructors Sign Up (GET)
+router.get('/instructors/signup', (req, res) => {
+
+    res.render("instructors/signup");
+
+});
+// Instructors Sign Up (POST)
+router.post(
+    "/instructors",
+    validator.body('email').isEmail(),
+    validator.body('password').isLength({ min: 5 }),
+
+    (req, res) => {
+
+        const validationError = validator.validationResult(req);
+        console.log(req.body);
+        if (!validationError.isEmpty()) {
+            return res.status(500).send("Validation Errors");
+        }
+        Instructor.createSecure(req.body, (err, newUser) => {
+            console.log("New User: ", newUser);
+            //req.session.userId = newUser._id;
+            res.redirect("/login");
+        });
+    }
+);
+
+
+// Instructor Login (GET)
+router.get('/instructors/login', (req, res) => {
+
+    res.render("instructors/login");
+
+});
+// Instructor Login (POST)
+router.post('/instructors/sessions', (req, res) => {
+
+    console.log("Login info in clear text: ")
+    console.log("Entered Email: ", req.body.email);
+    console.log("Entered Password: ", req.body.password);
+
+    // call authenticate function to check if password user entered is correct
+    Instructor.authenticate(req.body.email, req.body.password, (err, foundUser) => {
+        if (err) {
+            console.log("authentication error: ", err);
+            res.status(500).send(err);
+        } else {
+            console.log("setting sesstion user id ", foundUser._id);
+            req.session.userId = foundUser._id;
+            res.redirect("/home");
+        }
+    }
+    );
+});
+
+
+// User (as Instructor) Profile
+router.get('/profile', (req, res) => {
+    const userId = req.session.userId
+
+    Instructor.findById(userId)
+        .then(instructor => {
+            res.render('/profile', { instructor, userId });
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+});
+
+// Instructors Profile
+router.get('/instructors/:id', (req, res) => {
+
+    const id = req.params.id
+    Instructor.findById(id)
+        .then(instructors => {
+            res.render('instructors/profile', { instructors, userId: req.session.userId });
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).send("Error!");
+        });
 });
 
 // Instructors's Profile

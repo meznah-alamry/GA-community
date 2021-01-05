@@ -1,6 +1,7 @@
 <head>
     <title>Students</title>
 </head>
+
 <nav>
     <a href="/home">Home</a>
     |
@@ -27,6 +28,19 @@
 <div class="main">
     <h2 class="title">Student List</h2>
 
-    
+        <% for(key of students){%>
+
+            <div class="card">
+                <a href="/students/<%= key.id %>">
+                <div class="cardContainer">
+                    <h4><b><%= key.name %></b></h4>
+                    <p><%= key.course %></p>
+                </div>
+                </a>
+            </div>
+
+        <% } %>
+
+
 
 </div>

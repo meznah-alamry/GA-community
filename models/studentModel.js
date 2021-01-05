@@ -16,7 +16,6 @@ const StudentSchema = new Schema({
   },
   number: Number,
   course: [{}],
-
 });
 
 // create a new user with secure (hashed) password (for sign up)

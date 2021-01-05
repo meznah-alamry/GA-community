@@ -17,34 +17,29 @@
     |
     <a href="timeline">General Timeline</a>
 </nav>
-
 <div class="main">
-    <form action="/students" class="form" method="POST">
-        <h2 class="loginSignup"> Create Your Account</h2>
-        <p>Full Name</p>
-        <input type="text" placeholder="your name" name="name">
-        
-        <p>Email</p>
-        <input type="text" placeholder="your email" name="email">
+    <h2 class="loginSignup">Choose Account Type</h2>
+    <br>
+    <br>
+    <div class="signUpCards">
 
-        <p>Password</p>
-        <input type="password" placeholder="your password" name="password">
+        <div class="sCard">
+            <a href="/students/signup">
+                <img width="200" height="200" src="/img/student.png">
 
-        <p>Phone Number</p>
-        <input type="tel" id="phone" name="number" placeholder="966556677889">
+                <div class="sContainer">
+                    <h4><b>Student</b></h4>
+                </div>
+            </a>
+        </div>
 
-        <p>Courses:</p>
-        <input type="checkbox" name="course" value="DSI">
-        <label for="Course1">Software Engineering Immersive</label><br>
-
-        <input type="checkbox" name="course" value="SEI">
-        <label for="Course2">Data Science Immersive</label><br>
-
-        <input type="checkbox" name="course" value="UEDI">
-        <label for="Course3"> User Experience Design Immersive</label>
-        <br>
-        <br>
-        <input type="submit" value="Submit">
-
-    </form>
+        <div class="sCard">
+            <a href="/instructors/signup">
+                <img width="200" height="200" src="/img/teacher.png">
+                <div class="sContainer">
+                    <h4><b>Instructor</b></h4>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>

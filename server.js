@@ -7,6 +7,7 @@ const config = require("dotenv").config();
 const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 const path = require('path');
+const methodOverride = require('method-override');
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,6 +40,7 @@ mongoose.connect(
 );
 
 //********** Using Layouts and "Public Folder" **********/
+app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(expressLayouts);
 
@@ -79,7 +81,7 @@ app.get('/timeline', (req, res) => {
     res.render("timeline", {userId: req.session.userId});
 
 });
-app.get('/profile', (req, res) =>{
+app.get('/profile/', (req, res) =>{
 
     const userId = req.session.userId
     const userType = req.session.userType
@@ -101,7 +103,71 @@ app.get('/profile', (req, res) =>{
             res.status(500).send("Error!")
         });
     }
+    console.log("userType: ",userType);
+});
+
+// Edit Profile (GET)
+app.get('/profile/:id/edit', (req, res) =>{
+
+    let id = req.params.id;
+    const userId = req.session.userId
+    const userType = req.session.userType
+
+    if(userType==="Instructor"){
+        Instructor.findById(userId)
+        .then(instructor => {
+            res.render('instructors/edit',{instructor, userId});
+        }).catch((err) =>{
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+    }else if(userType==="Student"){
+        Student.findById(userId)
+        .then(student => {
+            res.render('students/edit',{student, userId});
+        }).catch((err) =>{
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+    }
     console.log(userType);
+});
+
+// Edit Profile (PUT)
+app.put('/profile/:id', (req, res) => {
+    
+    let id = req.params.id;
+    const userId = req.session.userId
+    const userType = req.session.userType
+
+if(userType==="Instructor"){
+
+    let updateProfile = {
+        name: req.body.name,
+        talent: req.body.talent,
+        email: req.body.email,
+        number: req.body.number
+    }
+    console.log("req.body recieved");
+    Instructor.findByIdAndUpdate(userId, updateProfile)
+    .then(() =>{
+        res.redirect("/profile")
+    }).catch(err => console.log(err))
+
+}else if(userType==="Student"){
+
+    let updateProfile = {
+        name: req.body.name,
+        email: req.body.email,
+        number: req.body.number
+    }
+    console.log("req.body recieved");
+    Student.findByIdAndUpdate(userId, updateProfile)
+    .then(() =>{
+        res.redirect("/profile")
+    }).catch(err => console.log(err))
+}
+
 });
 
 //**********  Controllers **********//

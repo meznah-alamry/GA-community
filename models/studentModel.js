@@ -15,13 +15,7 @@ const StudentSchema = new Schema({
     required: true
   },
   number: Number,
-<<<<<<< HEAD
-  course: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }]
-
-=======
   course: [{}],
->>>>>>> bb20ff96226ed5d14d7963e814b5736caaf227c8
-
 });
 
 // create a new user with secure (hashed) password (for sign up)

@@ -80,5 +80,5 @@ InstructorSchema.methods.checkPassword = function (password) {
 const Instructor = mongoose.model('Instructor', InstructorSchema);
 
 
-module.exports = instructor;
+module.exports = Instructor;
 

@@ -1,6 +1,7 @@
 # My-GA-Community
 ## Description
 a Simple Community for GA Instructors and Students. contains profile pages for students and instructors, information pages for GA courses, comment/discussion section and a star rating system for both instructors and courses. It also contains a Timeline that allows registered users to post in.
+- Link to [Google Slides](https://docs.google.com/presentation/d/1OOkBWRc8N6cmShxReXiObyZIeOTOQwSKQTyQ-Snjqtw/edit?usp=sharing)
 
 ## Team Members
 - Ibrahim Shaheen
@@ -61,5 +62,12 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
 ![URL](./assets/progress/day_3.png)
 ![URL](./assets/progress/day_3_2.png)
 ### Day-4
-- Functioning Timeline 
+- Functioning Timeline ✔︎
+- Fixed session bugs ✔︎
+- Enhanced profile editing ✔︎
+- Current Status:
+![URL](./assets/progress/day_4.png)
+![URL](./assets/progress/day_4_2.png)
 ### Day-5
+- Presentation Day
+- Link to [Google Slides](https://docs.google.com/presentation/d/1OOkBWRc8N6cmShxReXiObyZIeOTOQwSKQTyQ-Snjqtw/edit?usp=sharing)

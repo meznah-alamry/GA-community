@@ -1,0 +1,60 @@
+<head>
+    <title>Profile</title>
+</head>
+<nav>
+    <a href="/home">Home</a>
+    |
+    <% if (userId){%>
+        <a href="/profile" class="selected">Profile</a>
+        |
+        <a href="/logout">Logout</a>
+        |
+        <% } else { %>
+            <a href="/login">Login</a>
+            |
+            <a href="/signup">Sign Up</a>
+            |
+            <% } %>
+                <a href="/instructors">Instructors</a>
+                |
+                <a href="/courses">Courses</a>
+                |
+                <a href="/students">Students</a>
+                |
+                <a href="/timeline">General Timeline</a>
+</nav>
+
+
+<div class="students-container">
+    <div class="students-info">
+        <div class="students-img">
+            <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
+                alt="">
+        </div>
+        <div class="student-details">
+            <p><b>Name:</b>
+                <%= instructor.name %>
+            </p>
+            <p><b>Hidden Talent:</b>
+                <%= instructor.talent %>
+            </p>
+            <p><b>Email:</b>
+                <%= instructor.email %>
+            </p>
+            <p><b>Number:</b>
+                <%= instructor.number %>
+            </p>
+        </div>
+    </div>
+
+    <div class="students-courses">
+        <!-- <p><b>Enrolled in:</b></p> -->
+
+    </div>
+
+</div>
+<div class="main">
+    <a href="/profile/<%= instructor.id %>/edit">
+    <button class="button">Edit Profile</button>
+    </a>
+</div>

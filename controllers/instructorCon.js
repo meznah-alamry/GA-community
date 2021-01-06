@@ -10,6 +10,7 @@ const Instructor = require("../models/instructorModel");
 const Student = require("../models/studentModel");
 
 var bodyParser = require("body-parser");
+const { body } = require('express-validator');
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(
@@ -90,24 +91,25 @@ router.post('/instructors/sessions', (req, res) => {
         } else {
             console.log("setting sesstion user id ", foundUser._id);
             req.session.userId = foundUser._id;
+            req.session.userType = "Instructor"
             res.redirect("/home");
         }
     }
     );
 });
 
+// Instructor Rating (POST)
+router.post('/instructors/:id/rate', (req, res) => {
+    const id = req.params.id
+    const newRating = req.body.rating
 
-// User (as Instructor) Profile
-router.get('/profile', (req, res) => {
-    const userId = req.session.userId
+    //Rating.find({student: req.session.userId})
 
-    Instructor.findById(userId)
-        .then(instructor => {
-            res.render('/profile', { instructor, userId });
-        }).catch((err) => {
-            console.log(err);
-            res.status(500).send("Error!")
-        });
+    Instructor.findByIdAndUpdate(id , {$push:{rating:newRating }})
+    .then((updatedInstructor)=>{
+     res.redirect("/instructors/") // maybe redirect to a specific Instructor's Id. Maybe also check for double rating
+    }).catch(err =>console.log(err))
+
 });
 
 // Instructors Profile

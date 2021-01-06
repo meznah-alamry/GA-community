@@ -11,6 +11,7 @@ const Instructor = require("../models/instructorModel");
 const Timeline = require("../models/timelineModel");
 
 var bodyParser = require("body-parser");
+const e = require('express');
 router.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -34,15 +35,14 @@ router.get('/timeline', (req, res) => {
         .populate('Instructor')
         .populate('user')
         .then((messages) => {
-
             res.render("timeline", { messages, userId: req.session.userId });
         })
-
 
 
 });
 
 router.post('/timeline', (req, res) => {
+
     Timeline.create(
         { user: req.session.userId, content: req.body.timeline })
         .then(timeline => {

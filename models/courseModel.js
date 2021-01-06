@@ -3,14 +3,14 @@ const Schema = mongoose.Schema;
 
 const CourseSchema = new Schema({
 
-    Name: String,
-    Length: String,
-    Location: String,
-    Description: String
+    name: String,
+    length: String,
+    location: String,
+    description: String
     
 });
 
 
-var courses = mongoose.model('Courses', CourseSchema);
+var Course = mongoose.model('Course', CourseSchema);
 
-module.exports = courses;
+module.exports = Course;

@@ -28,6 +28,7 @@
 
 <div class="main">
     <h2 class="title">Timeline</h2>
+
     <% if(userId) { %>
         <form action="/timeline" method="POST">
             <input type="text" class="postContent" name="content">
@@ -38,7 +39,6 @@
 </div>
 
     <div class="timeline-container">
-
 
         <% timeline.forEach((el,i)=> { %>
 
@@ -59,7 +59,6 @@
                     <p>
                         <%= el.content %>
                     </p>
-
 
 
                 </div>

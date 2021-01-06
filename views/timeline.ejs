@@ -10,28 +10,67 @@
         |
         <a href="/logout">Logout</a>
         |
-<% } else { %>
-        <a href="/login">Login</a>
-        |
-        <a href="/signup">Sign Up</a>
-        |
- <% } %>
-    <a href="/instructors">Instructors</a>
-    |
-    <a href="/courses">Courses</a>
-    |
-    <a href="/students">Students</a>
-    |
-    <a href="/timeline" class="selected">General Timeline</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+            |
+            <a href="/signup">Sign Up</a>
+            |
+            <% } %>
+                <a href="/instructors">Instructors</a>
+                |
+                <a href="/courses">Courses</a>
+                |
+                <a href="/students">Students</a>
+                |
+                <a href="/timeline" class="selected">General Timeline</a>
 </nav>
+
+
 <div class="main">
     <h2 class="title">Timeline</h2>
+<% if(userId) { %>
+    <form action="/timeline" method="POST">
+        <input type="text" class="postContent" name="content">
+        <input type="submit" class="button" value="Post">
+    </form>
 </div>
+<% } %>
+
+
 <div class="timeline-container">
-    <div class="timeline-content">
+
+
+    <% timeline.forEach((el,i)=> { %>
+
+        <div class="timeline-content">
+
+            <div class="timeline-img">
+
+                <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
+                    alt="">
+            </div>
+
+            <div class="timeline-details">
+
+            <p><b><%= el.user %></b></p>
+
+            <p><%= el.content %></p>
+                
+            
+
+        </div>
+        </div>
+
+    <% }) %>
+
+
+
+    <!-- Hardcoded Posts -->
+
+    <!-- <div class="timeline-content">
         <div class="timeline-img">
             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-            alt="">
+                alt="">
         </div>
         <div class="timeline-details">
             <p><b>Name</b></p>
@@ -42,8 +81,8 @@
     <div class="timeline-content">
         <div class="timeline-img">
             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-            alt="">
-        </div>    
+                alt="">
+        </div>
         <div class="timeline-details">
             <p><b>Name</b></p>
             <p>Ali's homeworks are long :(</p>
@@ -52,8 +91,8 @@
     <div class="timeline-content">
         <div class="timeline-img">
             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-            alt="">
-        </div>    
+                alt="">
+        </div>
         <div class="timeline-details">
             <p><b>Name</b></p>
             <p>I went to Zulfi once, came back missing a leg</p>
@@ -62,8 +101,8 @@
     <div class="timeline-content">
         <div class="timeline-img">
             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-            alt="">
-        </div>    
+                alt="">
+        </div>
         <div class="timeline-details">
             <p><b>Name</b></p>
             <p>Have anyone tried Marco's Legendary Pizza yet?</p>
@@ -72,8 +111,8 @@
     <div class="timeline-content">
         <div class="timeline-img">
             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-            alt="">
-        </div>    
+                alt="">
+        </div>
         <div class="timeline-details">
             <p><b>Name</b></p>
             <p>I'm having issues with MongoDB, can someone help me?</p>
@@ -82,12 +121,13 @@
     <div class="timeline-content">
         <div class="timeline-img">
             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-            alt="">
-        </div>    
+                alt="">
+        </div>
         <div class="timeline-details">
             <p><b>Name</b></p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae maxime quae excepturi quisquam quidem aspernatur, consequuntur voluptas laudantium, illum corrupti tempora consequatur vel animi nihil molestias veniam expedita inventore sunt.</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae maxime quae excepturi quisquam quidem
+                aspernatur, consequuntur voluptas laudantium, illum corrupti tempora consequatur vel animi nihil
+                molestias veniam expedita inventore sunt.</p>
         </div>
+    </div> -->
     </div>
-</div>
-

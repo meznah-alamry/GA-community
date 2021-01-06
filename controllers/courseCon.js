@@ -14,15 +14,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(methodOverride("_method"));
 
-router.use(
-    session({
-        store: new mongoSessisonStore({ mongooseConnection: mongoose.connection }),
-        saveUninitialized: true,
-        resave: true,
-        secret: "SuperSecretCookie",
-        cookie: { maxAge: 30 * 60 * 1000 },
-    })
-);
 
 //***************************** Routes *****************************//
 

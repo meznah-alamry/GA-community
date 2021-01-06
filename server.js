@@ -44,12 +44,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(expressLayouts);
 
-//********** Index & Home **********//
-app.get('/', (req, res) => {
-
-    res.render("index");
-
-});
+//********** Home **********//
 app.get('/home', (req, res) => {
 
     res.render("home", {userId: req.session.userId});
@@ -76,11 +71,13 @@ app.get('/logout', (req, res) => {
 
 //********** Other Pages **********//
 
+// Timeline
 app.get('/timeline', (req, res) => {
 
     res.render("timeline", {userId: req.session.userId});
 
 });
+// Profile
 app.get('/profile/', (req, res) =>{
 
     const userId = req.session.userId
@@ -170,6 +167,12 @@ if(userType==="Instructor"){
 
 });
 
+// Index (Should always be the last)
+app.get('/', (req, res) => {
+
+    res.render("index");
+
+});
 //**********  Controllers **********//
 app.use(require("./controllers/studentCon"));
 app.use(require("./controllers/instructorCon"));

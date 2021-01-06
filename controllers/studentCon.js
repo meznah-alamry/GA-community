@@ -13,17 +13,6 @@ const Course = require("../models/courseModel");
 var bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({ extended: true }));
 
-
-router.use(
-    session({
-        store: new mongoSessisonStore({ mongooseConnection: mongoose.connection }),
-        saveUninitialized: true,
-        resave: true,
-        secret: "SuperSecretCookie",
-        cookie: { maxAge: 30 * 60 * 1000 },
-    })
-);
-
 //***************************** Routes *****************************//
 
 // Students List

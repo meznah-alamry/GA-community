@@ -42,6 +42,7 @@
             </div>
 
         </div>
+        <% if(userType==="Instructor"){%>
         <div class="centerButtons">
             <form class="inline" action="/courses/<%= course.id %>/edit">
                 <input type="submit" class="button" value="Edit">
@@ -51,6 +52,7 @@
             </form>
 
         </div>
+        <% } %>
     </div>
 
     <% if(userType==="Instructor"){ %>

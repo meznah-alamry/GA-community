@@ -8,8 +8,7 @@ const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 const path = require('path');
 const methodOverride = require('method-override');
-const Port= process.env.PORT || 4000;
-
+let port = process.env.PORT || 4000;
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -209,4 +208,4 @@ app.use(require("./controllers/timelineCon"));
 
 //********** Start Server **********//
 
-app.listen(Port, () => console.log(`GA Community Server is Running on Port: ${Port} `));
+app.listen(port, () => console.log(`GA Community Server is Running on Port: ${port} `));

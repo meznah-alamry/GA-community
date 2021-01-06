@@ -26,13 +26,29 @@
 </nav>
 
 <div class="main">
+
     <h2 class="title">Courses</h2>
     <% if(userType==="Instructor"){%>
     <a href="/courses/new"><button class="button">Create Course</button></a>
     <br>
     <br>
     <% } %>
+    <% courses.forEach((el,i) => {%>
     <div class="card">
+        <a href="/courses/<%= el.id %>">
+        <div class="cardContainer">
+            <h4><b><%= el.name %></b></h4>
+            <p><%= el.location%></p>
+            <p><%= el.length %> | <%= el.hours %> Hours | <%= el.type %></p>
+        </div>
+    </a>
+    </div>
+    <br>
+    <% }) %>
+
+
+    <!-- Hardcoded Courses -->
+    <!-- <div class="card">
         <div class="cardContainer">
             <h4><b>Software Engineering Immersive</b></h4>
             <p>Online</p>
@@ -54,6 +70,6 @@
             <p>Online</p>
             <p>12-week | 480 hours | Full-Time</p>
         </div>
-    </div>
+    </div> -->
 
 </div>

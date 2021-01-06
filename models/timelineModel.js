@@ -3,15 +3,12 @@ var mongoose = require('mongoose'),
 
 var TimelineSchema = new Schema({
     content: String,
-    user: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        refPath: 'user.onModel'
-    },
-    onModel: {
-        type: String,
-        enum: ['Student', 'Instructor']
-    }
+    user: String,
+    userId: String
+    // user: {type : mongoose.Schema.Types.ObjectId , ref : 'User' }
 });
 
-const Timeline = mongoose.model('Timeline', TimelineSchema);
-module.exports = Timeline;
+  const Timeline = mongoose.model('Timeline', TimelineSchema);
+  
+  // export user model
+  module.exports = Timeline;

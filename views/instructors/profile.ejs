@@ -38,11 +38,14 @@
             <p><b>Hidden Talent:</b>
                 <%= instructors.talent %>
             </p>
+            <p><b>Course:</b>
+                <%= instructors.course %> - <%= instructors.role %>
+            </p>
             <p><b>Email:</b>
                 <%= instructors.email %>
             </p>
-            <p><b>Course:</b>
-                <%= instructors.course %> - <%= instructors.role %>
+            <p><b>Number:</b>
+                <%= instructors.number %>
             </p>
 
         </div>
@@ -77,7 +80,7 @@
             stars = "★★★★★" 
             break;
         } %>
-        <p><b>Rating:</b> <%= stars %> </p>
+        <p><b>Rating:</b> <%= stars %> <em class="smallText">(total ratings: <%= instructors.rating.length %>)</em></p> 
                             
                         
         <% if(userId){%>

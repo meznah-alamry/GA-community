@@ -9,17 +9,53 @@
         |
         <a href="/logout">Logout</a>
         |
-<% } else { %>
-        <a href="/login">Login</a>
-        |
-        <a href="/signup">Sign Up</a>
-        |
- <% } %>
-    <a href="/instructors">Instructors</a>
-    |
-    <a href="/courses">Courses</a>
-    |
-    <a href="/students" class="selected">Students</a>
-    |
-    <a href="/timeline">General Timeline</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+            |
+            <a href="/signup">Sign Up</a>
+            |
+            <% } %>
+                <a href="/instructors">Instructors</a>
+                |
+                <a href="/courses" class="selected">Courses</a>
+                |
+                <a href="/students">Students</a>
+                |
+                <a href="/timeline">General Timeline</a>
 </nav>
+
+<div class="main">
+
+    <h2 class="title">Course Details</h2>
+
+
+    <div class="course-container">
+        <div class="students-info">
+            <div class="course-details">
+
+                <p><b>Course Name:</b> <%= course.name %></p>
+                <p><b>Location:</b> <%= course.location %></p>
+                <p><b>Length:</b> <%= course.length %> | <%= course.hours %> Hours </p>
+                <p><b>Type:</b> <%= course.type %></p>
+                <p><b>Description:</b><br><br><%= course.description %></p>
+
+            </div>
+
+        </div>
+        <div class="centerButtons">
+            <form class="inline" action="/courses/<%= course.id %>/edit">
+                <input type="submit" class="button" value="Edit">
+            </form>
+            <form class="inline" action="/courses/<%= course.id %>?_method=DELETE" method="POST">
+                <input type="submit" class="button" value="Delete">
+            </form>
+
+        </div>
+    </div>
+
+    <% if(userType==="Instructor"){ %>
+       
+    <% } %>
+
+
+</div>

@@ -40,7 +40,7 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
         * Description
 - Node/Express Initialization ✔︎
 - Current Status:
-![URL](./assets/progress/day-1.png)
+![URL](./assets/progress/day_1.png)
 
 ### Day-2
 - Login/Sign Up/Logout Functioning ✔︎
@@ -49,12 +49,17 @@ Click [Here](./assets/wireframes/README.md) to check wireframes
 - Sign Up for Instructors ✔︎
 - Instructors Profiles ✔︎
 - Current Status:
-![URL](./assets/progress/day-2.png)
+![URL](./assets/progress/day_2.png)
 
 ### Day-3
-- Instructor Rating System
-- Functioning Timeline
-- User Profile (As Instructor)
+- Instructor Rating System ✔︎
+- User Profile (As Instructor) ✔︎
+- Create Course ✔︎
+- Edit Profile ✔︎
+- Edit/Delete Course ✔︎
+- Current Status:
+![URL](./assets/progress/day_3.png)
+![URL](./assets/progress/day_3_2.png)
 ### Day-4
-
+- Functioning Timeline 
 ### Day-5

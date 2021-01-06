@@ -11,44 +11,59 @@ const Instructor = require("../models/instructorModel");
 const Timeline = require("../models/timelineModel");
 
 var bodyParser = require("body-parser");
-const e = require('express');
 router.use(bodyParser.urlencoded({ extended: true }));
 
-
-router.use(
-    session({
-        store: new mongoSessisonStore({ mongooseConnection: mongoose.connection }),
-        saveUninitialized: true,
-        resave: true,
-        secret: "SuperSecretCookie",
-        cookie: {maxAge: 30 * 60 * 1000 },
-    })
-);
-
-
-
+// Timeline
 router.get('/timeline', (req, res) => {
 
-
-    Timeline.find()
-        .populate('Student')
-        .populate('Instructor')
-        .populate('user')
-        .then((messages) => {
-            res.render("timeline", { messages, userId: req.session.userId });
-        })
-
+    Timeline.find()  //.sort({content:-1})
+    .then(timeline => {
+        res.render("timeline", {userId: req.session.userId, timeline: timeline});
+    })
+    .catch(err => console.log(err))
 
 });
 
+// Posting
 router.post('/timeline', (req, res) => {
 
-    Timeline.create(
-        { user: req.session.userId, content: req.body.timeline })
-        .then(timeline => {
-            res.redirect('/timeline')
+    const userType = req.session.userType;
+    const userId = req.session.userId;
 
-        }).catch(err => console.log(err));
-});
+    if(userType==="Student"){
+        
+        Student.findById({_id: userId})
+        .then(student => {
+            Timeline.create(
+                {userId: req.session.userId, user: student.name, content:req.body.content})
+            .then(timeline => {
+                res.redirect('/timeline')
+            }).catch(err =>console.log(err));
+            
+        }).catch(err => console.log(err))
 
+    }else if(userType==="Instructor"){
+
+                
+        Instructor.findById({_id: userId})
+        .then(instructor => {
+            Timeline.create(
+                {userId: req.session.userId, user: instructor.name, content:req.body.content})
+            .then(timeline => {
+                res.redirect('/timeline')
+            }).catch(err =>console.log(err));
+            
+        }).catch(err => console.log(err))
+
+    }
+
+
+})
+
+
+
+
+
+
+//********** Export **********//
 module.exports = router;

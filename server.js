@@ -8,6 +8,7 @@ const mongoSessisonStore = require("connect-mongo")(session);
 const validator = require("express-validator");
 const path = require('path');
 const methodOverride = require('method-override');
+const Port= process.env.PORT || 4000;
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //********** Models **********//
 const Student = require("./models/studentModel");
 const Instructor = require('./models/instructorModel');
+const Course = require('./models/courseModel');
  //const IInstructor =require("./models/instructorModel");
   //app.use(require("./models/courseModel"));
 
@@ -44,12 +46,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(expressLayouts);
 
-//********** Index & Home **********//
-app.get('/', (req, res) => {
-
-    res.render("index");
-
-});
+//********** Home **********//
 app.get('/home', (req, res) => {
 
     res.render("home", {userId: req.session.userId});
@@ -70,11 +67,38 @@ app.get('/signup', (req, res) => {
 app.get('/logout', (req, res) => {
 
     req.session.userId = null;
+    req.session.userType = null;
     res.render("login");
 
 });
 
 //********** Other Pages **********//
+app.get('/profile/', (req, res) =>{
+
+    const userId = req.session.userId
+    const userType = req.session.userType
+
+    if(userType==="Instructor"){
+        Instructor.findById(userId)
+        .then(instructor => {
+            res.render('profile-instructor',{instructor, userId});
+        }).catch((err) =>{
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+    }else if(userType==="Student"){
+        Student.findById(userId)
+        .then(student => {
+            res.render('profile-student',{student, userId});
+        }).catch((err) =>{
+            console.log(err);
+            res.status(500).send("Error!")
+        });
+    }
+    console.log("userType: ",userType);
+});
+
+// Profile
 app.get('/profile/', (req, res) =>{
 
     const userId = req.session.userId
@@ -108,13 +132,17 @@ app.get('/profile/:id/edit', (req, res) =>{
     const userType = req.session.userType
 
     if(userType==="Instructor"){
-        Instructor.findById(userId)
-        .then(instructor => {
-            res.render('instructors/edit',{instructor, userId});
-        }).catch((err) =>{
-            console.log(err);
-            res.status(500).send("Error!")
-        });
+        Course.find()
+        .then(courses => {
+            Instructor.findById(userId)
+            .then(instructor => {
+                res.render('instructors/edit',{instructor, userId, courses});
+            }).catch((err) =>{
+                console.log(err);
+                res.status(500).send("Error!")
+            });
+        })
+
     }else if(userType==="Student"){
         Student.findById(userId)
         .then(student => {
@@ -140,9 +168,11 @@ if(userType==="Instructor"){
         name: req.body.name,
         talent: req.body.talent,
         email: req.body.email,
-        number: req.body.number
+        number: req.body.number,
+        course: req.body.course,
+        role: req.body.role
     }
-    console.log("req.body recieved");
+    console.log(req.body);
     Instructor.findByIdAndUpdate(userId, updateProfile)
     .then(() =>{
         res.redirect("/profile")
@@ -164,13 +194,19 @@ if(userType==="Instructor"){
 
 });
 
+// Index (Should always be the last)
+app.get('/', (req, res) => {
+
+    res.render("index");
+
+});
+
 //**********  Controllers **********//
 app.use(require("./controllers/studentCon"));
 app.use(require("./controllers/instructorCon"));
 app.use(require("./controllers/courseCon"));
 app.use(require("./controllers/timelineCon"));
 
-
 //********** Start Server **********//
-let Port = 4000;
+
 app.listen(Port, () => console.log(`GA Community Server is Running on Port: ${Port} `));

@@ -28,46 +28,50 @@
 
 <div class="main">
     <h2 class="title">Timeline</h2>
-<% if(userId) { %>
-    <form action="/timeline" method="POST">
-        <input type="text" class="postContent" name="content">
-        <input type="submit" class="button" value="Post">
-    </form>
+    <% if(userId) { %>
+        <form action="/timeline" method="POST">
+            <input type="text" class="postContent" name="content">
+            <input type="submit" class="button" value="Post">
+        </form>
 </div>
 <% } %>
+    </div>
+
+    <div class="timeline-container">
 
 
-<div class="timeline-container">
+        <% timeline.forEach((el,i)=> { %>
+
+            <div class="timeline-content">
+
+                <div class="timeline-img">
+
+                    <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
+                        alt="">
+                </div>
+
+                <div class="timeline-details">
+
+                    <p><b>
+                            <%= el.user %>
+                        </b></p>
+
+                    <p>
+                        <%= el.content %>
+                    </p>
 
 
-    <% timeline.forEach((el,i)=> { %>
 
-        <div class="timeline-content">
-
-            <div class="timeline-img">
-
-                <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
-                    alt="">
+                </div>
             </div>
 
-            <div class="timeline-details">
-
-            <p><b><%= el.user %></b></p>
-
-            <p><%= el.content %></p>
-                
-            
-
-        </div>
-        </div>
-
-    <% }) %>
+            <% }) %>
 
 
 
-    <!-- Hardcoded Posts -->
+                <!-- Hardcoded Posts -->
 
-    <!-- <div class="timeline-content">
+                <!-- <div class="timeline-content">
         <div class="timeline-img">
             <img src="https://icons-for-free.com/iconfiles/png/512/customer+information+personal+profile+user+icon-1320086045331670685.png"
                 alt="">

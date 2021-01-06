@@ -184,4 +184,4 @@ app.use(require("./controllers/timelineCon"));
 
 //********** Start Server **********//
 
-app.listen(port, () => console.log(`GA Community Server is Running on Port: ${port} `));
+app.listen(process.env.PORT || 4000, () => console.log(`GA Community Server is Running on Port: ${port} `));

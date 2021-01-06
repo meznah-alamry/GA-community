@@ -41,6 +41,19 @@
                 <input type="text" name="talent" value="<%= instructor.talent %>"/>
             </p>
 
+            <p><b>Course:</b>
+                <select name="course">
+                    <% courses.forEach((el,i) => { %>
+                        <option value="<%= el.name %>"><%= el.name %></option>
+                  <%  }) %>  
+                </select>
+                <select name="role">
+                        <option value="LI">LI</option>
+                        <option value="JLI">JLI</option>
+                        <option value="IA">IA</option>
+                </select>
+            </p>
+
             <p><b>Email:</b>
                 <input type="text" name="email" value="<%= instructor.email %>"/>
             </p>

@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //********** Models **********//
 const Student = require("./models/studentModel");
 const Instructor = require('./models/instructorModel');
+const Course = require('./models/courseModel');
  //const IInstructor =require("./models/instructorModel");
   //app.use(require("./models/courseModel"));
 
@@ -65,18 +66,13 @@ app.get('/signup', (req, res) => {
 app.get('/logout', (req, res) => {
 
     req.session.userId = null;
+    req.session.userType = null;
     res.render("login");
 
 });
 
 //********** Other Pages **********//
 
-// Timeline
-app.get('/timeline', (req, res) => {
-
-    res.render("timeline", {userId: req.session.userId});
-
-});
 // Profile
 app.get('/profile/', (req, res) =>{
 
@@ -111,13 +107,17 @@ app.get('/profile/:id/edit', (req, res) =>{
     const userType = req.session.userType
 
     if(userType==="Instructor"){
-        Instructor.findById(userId)
-        .then(instructor => {
-            res.render('instructors/edit',{instructor, userId});
-        }).catch((err) =>{
-            console.log(err);
-            res.status(500).send("Error!")
-        });
+        Course.find()
+        .then(courses => {
+            Instructor.findById(userId)
+            .then(instructor => {
+                res.render('instructors/edit',{instructor, userId, courses});
+            }).catch((err) =>{
+                console.log(err);
+                res.status(500).send("Error!")
+            });
+        })
+
     }else if(userType==="Student"){
         Student.findById(userId)
         .then(student => {
@@ -143,9 +143,11 @@ if(userType==="Instructor"){
         name: req.body.name,
         talent: req.body.talent,
         email: req.body.email,
-        number: req.body.number
+        number: req.body.number,
+        course: req.body.course,
+        role: req.body.role
     }
-    console.log("req.body recieved");
+    console.log(req.body);
     Instructor.findByIdAndUpdate(userId, updateProfile)
     .then(() =>{
         res.redirect("/profile")
@@ -173,11 +175,12 @@ app.get('/', (req, res) => {
     res.render("index");
 
 });
+
 //**********  Controllers **********//
 app.use(require("./controllers/studentCon"));
 app.use(require("./controllers/instructorCon"));
 app.use(require("./controllers/courseCon"));
-
+app.use(require("./controllers/timelineCon"));
 
 //********** Start Server **********//
 let Port = 4000;
